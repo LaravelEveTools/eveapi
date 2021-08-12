@@ -1,0 +1,18 @@
+{
+    "name": "laravelevetools/eve-api",
+    "description": "Collections of abstract laravel jobs to interact with eves online ESI endpoints",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "LaravelEveTools\\EveApi\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "laravel/framework": "^8.40",
+        "eveseat/eseye": "dev-master"
+    },
+    "require-dev": {
+        "laravel/tinker": "3.x-dev"
+    }
+}
