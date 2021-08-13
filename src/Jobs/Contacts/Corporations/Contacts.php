@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEveTools\EveApi\Jobs\Contacts\Corporation;
+namespace LaravelEveTools\EveApi\Jobs\Contacts\Corporations;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractCorporationJob;
 

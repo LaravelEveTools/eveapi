@@ -10,7 +10,7 @@
     "minimum-stability": "dev",
     "require": {
         "laravel/framework": "^8.40",
-        "eveseat/eseye": "dev-master"
+        "eveseat/eseye": "^2.4"
     },
     "require-dev": {
         "laravel/tinker": "3.x-dev"

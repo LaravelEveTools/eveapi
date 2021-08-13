@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEveTools\EveApi\Jobs\Industry\Jobs\Characters;
+namespace LaravelEveTools\EveApi\Jobs\Industry\Characters;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 

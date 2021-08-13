@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEveTools\EveApi\Jobs\Markets\Corporations;
+namespace LaravelEveTools\EveApi\Jobs\Market\Corporations;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCorporationJob;
 

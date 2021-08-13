@@ -4,7 +4,7 @@ namespace LaravelEveTools\EveApi\Jobs\Universe;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
-abstract class BLoodlines extends EsiBase
+abstract class Bloodlines extends EsiBase
 {
 
     protected $endpoint = '/universe/bloodlines/';

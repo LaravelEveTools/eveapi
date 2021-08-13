@@ -4,7 +4,7 @@ namespace LaravelEveTools\EveApi\Jobs\Market;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
-abstract class ORders extends EsiBase
+abstract class Orders extends EsiBase
 {
     protected $endpoint = '/markets/{region_id}/orders/';
 

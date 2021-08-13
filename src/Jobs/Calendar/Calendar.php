@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEveTools\EveApi\Calendar;
+namespace LaravelEveTools\EveApi\Jobs\Calendar;
 
 use App\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
