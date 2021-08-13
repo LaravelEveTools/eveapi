@@ -34,7 +34,7 @@ abstract class AbstractJob implements ShouldQueue
     }
 
     public function failed(\Exception $exception){
-        dispatch(new EsiLoggableEvent((new LoggingContainer)
+        event(new EsiLoggableEvent((new LoggingContainer)
             ->set('type', 'exception')
             ->set('exd', get_class($exception).':'.$exception->getMessage())
             ->set('exf', 1)

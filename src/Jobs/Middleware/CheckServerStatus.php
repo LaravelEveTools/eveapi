@@ -2,15 +2,12 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Middleware;
 
-use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
-
-class CheckEsiStatus
+class CheckServerStatus
 {
 
     public function handle($job, $next)
     {
-        logger()->debug('Base ESI status class called');
+        logger()->debug('Base Server Status called');
         $next($job);
     }
-
 }

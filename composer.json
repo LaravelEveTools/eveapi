@@ -14,5 +14,12 @@
     },
     "require-dev": {
         "laravel/tinker": "3.x-dev"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelEveTools\\EveApi\\EveApiServiceProvider"
+            ]
+        }
     }
 }

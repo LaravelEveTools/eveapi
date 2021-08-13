@@ -3,16 +3,19 @@
 namespace LaravelEveTools\EveApi\Jobs\Abstracts;
 
 use App\Exceptions\TemporaryEsiOutageException;
-use App\Jobs\Middleware\CheckEsiRateLimit;
-use App\Jobs\Middleware\CheckServerStatus;
+
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
+use LaravelEveTools\EveApi\Contracts\Middleware\CheckEsiStatusInterface;
+use LaravelEveTools\EveApi\Contracts\Middleware\CheckServerStatusInterface;
 use LaravelEveTools\EveApi\Events\EsiLoggableEvent;
 use LaravelEveTools\EveApi\Exceptions\PermanentInvalidTokenException;
 use LaravelEveTools\EveApi\Exceptions\UnavailableEveServerException;
 use LaravelEveTools\EveApi\Helpers\LoggingContainer;
+use LaravelEveTools\EveApi\Jobs\Middleware\CheckEsiRateLimit;
+use LaravelEveTools\EveApi\Jobs\Middleware\CheckEsiStatus;
 use LaravelEveTools\EveApi\Models\RefreshToken;
 use Seat\Eseye\Containers\EsiAuthentication;
 use Seat\Eseye\Containers\EsiResponse;
@@ -110,9 +113,12 @@ abstract class EsiBase extends AbstractJob
     public function middleware()
     {
         return [
-            //new CheckEsiStatus,
-            //new CheckEsiRateLimit,
-            //new CheckServerStatus,
+            app()->make(CheckEsiStatusInterface::class),
+            app()->make(CheckServerStatusInterface::class),
+            CheckEsiStatusInterface::class,
+            new CheckEsiStatus,
+
+            new CheckEsiRateLimit,
         ];
     }
 
@@ -165,9 +171,9 @@ abstract class EsiBase extends AbstractJob
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
-    public function failed(\Exception $exception)
+    public function failed(Exception $exception)
     {
         parent::failed($exception);
 
@@ -186,7 +192,7 @@ abstract class EsiBase extends AbstractJob
 
     /**
      * @param int $amount
-     * @throws \Exception
+     * @throws Exception
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function incrementEsiRateLimit(int $amount = 1)
@@ -248,7 +254,8 @@ abstract class EsiBase extends AbstractJob
             $this->handleEsiFailedCall($exception);
         }
 
-        if($result->isCacheLoad())
+
+        if($result->isCachedLoad())
             return $result;
 
         $this->warning($result);
@@ -257,7 +264,7 @@ abstract class EsiBase extends AbstractJob
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function validateCall(): void
     {
@@ -300,7 +307,7 @@ abstract class EsiBase extends AbstractJob
         if(! is_null($response->pages) && $this->page === null){
             $this->eseye()->getLogger()->warning('Responses contained pages but none was expected');
 
-            dispatch(new EsiLoggableEvent((new LoggingContainer)
+            event(new EsiLoggableEvent((new LoggingContainer)
                 ->set('type', 'endpoint_warninig')
                 ->set('ec', 'unexpected_page')
                 ->set('el', $this->version)
@@ -311,7 +318,7 @@ abstract class EsiBase extends AbstractJob
         if(! is_null($this->page) && $response->pages === null){
             $this->eseye()->getLogger()->warning('Expected a paged response but had none');
 
-            dispatch(new EsiLoggableEvent((new LoggingContainer)
+            event(new EsiLoggableEvent((new LoggingContainer)
                 ->set('type', 'endpoint_warning')
                 ->set('ec', 'unexpected_pages')
                 ->set('el', $this->version)
@@ -323,7 +330,7 @@ abstract class EsiBase extends AbstractJob
             $this->eseye()->getLogger()->warnining('A response contained a warning: '.
                 $response->headers['Warning']);
 
-            dispatch(new EsiLoggableEvent((new LoggingContainer)
+            event(new EsiLoggableEvent((new LoggingContainer)
                 ->set('type','generic_warning')
                 ->set('ec', 'missing_pages')
                 ->set('el', $this->endpoint)
