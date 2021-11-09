@@ -10,12 +10,15 @@ class CheckTokenScope
 
     public function handle($job, $next)
     {
+
         if(! is_subclass_of($job, EsiBase::class)){
+
             $next($job);
             return;
         }
 
         if($job->getScope() == '' || in_array($job->getScope(), $job->getToken()->scopes)){
+
             $next($job);
             return;
         }

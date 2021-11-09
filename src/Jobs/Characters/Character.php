@@ -11,7 +11,7 @@ abstract class Character extends AbstractCharacterJob
 
     protected $endpoint = '/characters/{character_id}/';
 
-    protected $version = 'v4';
+    protected $version = 'v5';
 
     protected $tags = ['public', 'character'];
 

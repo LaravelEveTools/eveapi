@@ -28,6 +28,7 @@ class CheckEsiRateLimit
 
     private function isEsiRateLimitReached(EsiBase $job): bool
     {
+
         $current = cache()->get($job::RATE_LIMIT_KEY) ?: 0;
 
         logger()->debug('Rate Limit Status', ['current'=>$current, 'limit'=> $job::RATE_LIMIT]);

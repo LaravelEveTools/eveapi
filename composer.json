@@ -1,6 +1,7 @@
 {
     "name": "laravelevetools/eve-api",
     "description": "Collections of abstract laravel jobs to interact with eves online ESI endpoints",
+    "version": "1.0",
     "type": "library",
     "autoload": {
         "psr-4": {

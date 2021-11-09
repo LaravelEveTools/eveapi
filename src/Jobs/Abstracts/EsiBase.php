@@ -2,7 +2,7 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Abstracts;
 
-use App\Exceptions\TemporaryEsiOutageException;
+//use App\Exceptions\TemporaryEsiOutageException;
 
 use Exception;
 use Illuminate\Support\Arr;
@@ -15,7 +15,6 @@ use LaravelEveTools\EveApi\Exceptions\PermanentInvalidTokenException;
 use LaravelEveTools\EveApi\Exceptions\UnavailableEveServerException;
 use LaravelEveTools\EveApi\Helpers\LoggingContainer;
 use LaravelEveTools\EveApi\Jobs\Middleware\CheckEsiRateLimit;
-use LaravelEveTools\EveApi\Jobs\Middleware\CheckEsiStatus;
 use LaravelEveTools\EveApi\Models\RefreshToken;
 use Seat\Eseye\Containers\EsiAuthentication;
 use Seat\Eseye\Containers\EsiResponse;
@@ -55,7 +54,7 @@ abstract class EsiBase extends AbstractJob
      * GET, POST, PUT, DELETE
      * @var string
      */
-    protected $method = '';
+    protected $method = 'get';
 
     /**
      * API Endpoint
@@ -115,9 +114,6 @@ abstract class EsiBase extends AbstractJob
         return [
             app()->make(CheckEsiStatusInterface::class),
             app()->make(CheckServerStatusInterface::class),
-            CheckEsiStatusInterface::class,
-            new CheckEsiStatus,
-
             new CheckEsiRateLimit,
         ];
     }
@@ -137,6 +133,14 @@ abstract class EsiBase extends AbstractJob
             $tags[] = 'public';
 
         return $tags;
+    }
+
+    /**
+     * @return string
+     */
+    public function getScope(): string
+    {
+        return $this->scope ?: '';
     }
 
     /**
@@ -245,6 +249,8 @@ abstract class EsiBase extends AbstractJob
 
         if(! is_null($this->page))
             $client->page($this->page);
+
+
 
         try{
             $result = $client->invoke($this->method, $this->endpoint, empty($path_values) ? $this->buildUriValues() : $path_values);
@@ -357,7 +363,7 @@ abstract class EsiBase extends AbstractJob
             if(! empty($last_auth->refresh_token))
                 $token->refresh_token = $last_auth->refresh_token;
 
-            $token->$token = $last_auth->accesss_token ?? '-';
+            $token->token = $last_auth->access_token ?? '-';
             $token->expires_on = $last_auth->token_expires;
 
             $token->save();

@@ -22,7 +22,7 @@ class RefreshToken extends Model
     protected $dates = ['expires_on', 'deleted_at'];
 
     protected $fillable = [
-        'character_id', 'version', 'user_id', 'scopes', 'expired_on', 'token', 'character_owner_hash'
+        'character_id', 'version', 'user_id', 'scopes', 'refresh_token', 'expired_on', 'token', 'character_owner_hash'
     ];
 
     public $incrementing = false;

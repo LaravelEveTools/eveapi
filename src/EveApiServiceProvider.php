@@ -15,6 +15,7 @@ class EveApiServiceProvider extends ServiceProvider {
     public function boot(){
         $this->add_esi_config();
 
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
 
     public function register(){

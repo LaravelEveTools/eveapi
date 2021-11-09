@@ -13,20 +13,21 @@ class CreateRefreshTokenTable extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable('refresh_tokens')) {
-            Schema::create('refresh_tokens', function (Blueprint $table) {
-                $table->bigInteger('character_id');
-                $table->smallInteger('version');
-                $table->integer('user_id');
-                $table->mediumText('refresh_token');
-                $table->longText('scopes');
-                $table->text('token');
-                $table->char('character_owner_hash', 255);
-                $table->timestamps();
-                $table->softDeletes();
-                $table->primary(['character_id']);
-            });
-        }
+
+        Schema::create('refresh_tokens', function (Blueprint $table) {
+            $table->bigInteger('character_id');
+            $table->smallInteger('version');
+            $table->integer('user_id');
+            $table->mediumText('refresh_token');
+            $table->longText('scopes');
+            $table->text('token');
+            $table->char('character_owner_hash', 255);
+            $table->datetime('expires_on')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+            $table->primary(['character_id']);
+        });
+
     }
 
     /**
@@ -36,6 +37,6 @@ class CreateRefreshTokenTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('refresh_token');
+        Schema::dropIfExists('refresh_tokens');
     }
 }

@@ -17,7 +17,7 @@ class CheckTokenVersion
             return;
         }
 
-        $ver = $job->getToken()->version();
+        $ver = $job->getToken()->version;
 
         if($ver == RefreshToken::CURRENT_VERSION){
             $next($job);

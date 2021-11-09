@@ -9,7 +9,6 @@ class CheckEsiStatus
 
     public function handle($job, $next)
     {
-        logger()->debug('Base ESI status class called');
         $next($job);
     }
 
