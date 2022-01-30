@@ -12,7 +12,9 @@ use LaravelEveTools\EveApi\Contracts\Middleware\CheckEsiStatusInterface;
 use LaravelEveTools\EveApi\Contracts\Middleware\CheckServerStatusInterface;
 use LaravelEveTools\EveApi\Events\EsiLoggableEvent;
 use LaravelEveTools\EveApi\Exceptions\PermanentInvalidTokenException;
+use LaravelEveTools\EveApi\Exceptions\TemporaryEsiOutageException;
 use LaravelEveTools\EveApi\Exceptions\UnavailableEveServerException;
+use LaravelEveTools\EveApi\Exceptions\UndocumentedEsiResponse;
 use LaravelEveTools\EveApi\Helpers\LoggingContainer;
 use LaravelEveTools\EveApi\Jobs\Middleware\CheckEsiRateLimit;
 use LaravelEveTools\EveApi\Models\RefreshToken;
@@ -105,6 +107,11 @@ abstract class EsiBase extends AbstractJob
     protected $client;
 
 
+    protected function skipIfTrue(EsiResponse $response): bool
+    {
+        return $response->isCachedLoad() && app()->environment('production');
+    }
+
     /**
      * Things to check before running the job.
      * @return array
@@ -129,7 +136,7 @@ abstract class EsiBase extends AbstractJob
     public function tags(): array
     {
         $tags = parent::tags();
-        if(is_null($this->token))
+        if (is_null($this->token))
             $tags[] = 'public';
 
         return $tags;
@@ -162,7 +169,8 @@ abstract class EsiBase extends AbstractJob
     /**
      * @return \LaravelEveTools\EveApi\Models\RefreshToken|null
      */
-    public function getToken(): ?RefreshToken{
+    public function getToken(): ?RefreshToken
+    {
         return $this->token;
     }
 
@@ -175,20 +183,19 @@ abstract class EsiBase extends AbstractJob
     }
 
     /**
+     * @param Exception $exception
      * @throws Exception
      */
-    public function failed(Exception $exception)
+    public function failed(\Throwable $exception)
     {
         parent::failed($exception);
 
-        if($exception instanceof PermanentInvalidTokenException)
-        {
+        if ($exception instanceof PermanentInvalidTokenException) {
             $this->token->delete();
         }
 
-        if($exception instanceof UnavailableEveServerException)
-        {
-            cache()->remember('eve_sever_status', 60, function(){
+        if ($exception instanceof UnavailableEveServerException) {
+            cache()->remember('eve_sever_status', 60, function () {
                 return null;
             });
         }
@@ -201,9 +208,9 @@ abstract class EsiBase extends AbstractJob
      */
     public function incrementEsiRateLimit(int $amount = 1)
     {
-        if($this->getRateLimitKeyTtl() > 3){
+        if ($this->getRateLimitKeyTtl() > 3) {
             cache()->increment(self::RATE_LIMIT_KEY, $amount);
-        }else{
+        } else {
             cache()->set(self::RATE_LIMIT_KEY, $amount, carbon('now')
                 ->addSeconds(self::RATE_LIMIT_DURATION));
         }
@@ -211,7 +218,7 @@ abstract class EsiBase extends AbstractJob
 
     public function getRequestBody($key = null)
     {
-        if(is_null($key))
+        if (is_null($key))
             return $this->request_body;
 
         return Arr::get($this->request_body, $key, null);
@@ -219,7 +226,7 @@ abstract class EsiBase extends AbstractJob
 
     public function getQueryString($key = null)
     {
-        if(is_null($key))
+        if (is_null($key))
             return $this->query_string;
 
         return Arr::get($this->query_string, $key, null);
@@ -247,21 +254,20 @@ abstract class EsiBase extends AbstractJob
         $client->setQueryString($this->getQueryString());
 
 
-        if(! is_null($this->page))
+        if (!is_null($this->page))
             $client->page($this->page);
 
 
-
-        try{
+        try {
             $result = $client->invoke($this->method, $this->endpoint, empty($path_values) ? $this->buildUriValues() : $path_values);
 
             $this->updateRefreshToken();
-        }catch(RequestFailedException $exception){
+        } catch (RequestFailedException $exception) {
             $this->handleEsiFailedCall($exception);
         }
 
 
-        if($result->isCachedLoad())
+        if ($result->isCachedLoad())
             return $result;
 
         $this->warning($result);
@@ -274,13 +280,13 @@ abstract class EsiBase extends AbstractJob
      */
     public function validateCall(): void
     {
-        if(! in_array($this->method, ['get', 'post', 'put', 'patch', 'delete']))
+        if (!in_array($this->method, ['get', 'post', 'put', 'patch', 'delete']))
             throw new Exception('Invalid HTTP Method used');
 
-        if(trim($this->endpoint === ''))
+        if (trim($this->endpoint === ''))
             throw new Exception('Empty endpoint');
 
-        if(trim($this->version) === '' && (in_array('meta', $this->tags())))
+        if (trim($this->version) === '' && (in_array('meta', $this->tags())))
             throw new Exception('version is empty');
 
     }
@@ -292,7 +298,7 @@ abstract class EsiBase extends AbstractJob
     {
         $this->client = app('esi-client');
 
-        if(is_null($this->token))
+        if (is_null($this->token))
             return $this->client = $this->client->get();
         $this->token = $this->token->fresh();
 
@@ -308,9 +314,10 @@ abstract class EsiBase extends AbstractJob
      * @param \Seat\Eseye\Containers\EsiResponse $response
      * @throws \Seat\Eseye\Exceptions\InvalidContainerDataException
      */
-    public function warning(EsiResponse $response): void{
+    public function warning(EsiResponse $response): void
+    {
 
-        if(! is_null($response->pages) && $this->page === null){
+        if (!is_null($response->pages) && $this->page === null) {
             $this->eseye()->getLogger()->warning('Responses contained pages but none was expected');
 
             event(new EsiLoggableEvent((new LoggingContainer)
@@ -321,7 +328,7 @@ abstract class EsiBase extends AbstractJob
             ));
         }
 
-        if(! is_null($this->page) && $response->pages === null){
+        if (!is_null($this->page) && $response->pages === null) {
             $this->eseye()->getLogger()->warning('Expected a paged response but had none');
 
             event(new EsiLoggableEvent((new LoggingContainer)
@@ -332,12 +339,12 @@ abstract class EsiBase extends AbstractJob
             ));
         }
 
-        if(array_key_exists('warning', $response->headers)){
-            $this->eseye()->getLogger()->warnining('A response contained a warning: '.
+        if (array_key_exists('warning', $response->headers)) {
+            $this->eseye()->getLogger()->warnining('A response contained a warning: ' .
                 $response->headers['Warning']);
 
             event(new EsiLoggableEvent((new LoggingContainer)
-                ->set('type','generic_warning')
+                ->set('type', 'generic_warning')
                 ->set('ec', 'missing_pages')
                 ->set('el', $this->endpoint)
                 ->set('ev', $response->headers['Warning'])
@@ -350,17 +357,17 @@ abstract class EsiBase extends AbstractJob
      */
     public function updateRefreshToken(): void
     {
-        tap($this->token, function($token){
+        tap($this->token, function ($token) {
 
-            if(is_null($this->client) || is_null($token))
+            if (is_null($this->client) || is_null($token))
                 return;
 
-            if(! $this->client->isAuthenticated())
+            if (!$this->client->isAuthenticated())
                 return;
 
             $last_auth = $this->client->getAuthentication();
 
-            if(! empty($last_auth->refresh_token))
+            if (!empty($last_auth->refresh_token))
                 $token->refresh_token = $last_auth->refresh_token;
 
             $token->token = $last_auth->access_token ?? '-';
@@ -376,7 +383,7 @@ abstract class EsiBase extends AbstractJob
      */
     public function nextPage(?int $pages): bool
     {
-        if(is_null($pages) || $this->page >= $pages)
+        if (is_null($pages) || $this->page >= $pages)
             return false;
 
         $this->page++;
@@ -403,9 +410,8 @@ abstract class EsiBase extends AbstractJob
 
         $response = $exception->getEsiResponse();
 
-
-        if($response->getErrorCode() == 403 && $response->error() == 'token expiry is too far in the future'){
-            if($this->token){
+        if ($response->getErrorCode() == 403 && $response->error() == 'token expiry is too far in the future') {
+            if ($this->token) {
                 $this->token->expires_on = carbon()->subMinutes(10);
                 $this->token->save();
             }
@@ -413,15 +419,21 @@ abstract class EsiBase extends AbstractJob
             throw new TemporaryEsiOutageException($response->error(), $response->getErrorCode());
         }
 
-        if($response->getErrorCode() == 400 && in_array($response->error(), self::PERMANENT_INVALID_TOKEN_MESSAGE))
+        if ($response->getErrorCode() == 400 && in_array($response->error(), self::PERMANENT_INVALID_TOKEN_MESSAGE))
             throw new PermanentInvalidTokenException($response->error(), $response->getErrorCode());
 
-        if(($response->getErrorCode() == 503 && $response->error() == 'The datasource tranquility is temporarily unavailable') ||
+        if (($response->getErrorCode() == 503 && $response->error() == 'The datasource tranquility is temporarily unavailable') ||
             ($response->getErrorCode() == 504 && $response->error() == 'Timeout contacting tranquility'))
             throw new UnavailableEveServerException($response->error(), $response->getErrorCode());
 
-        if($response->getErrorCode() >= 500)
+        if ($response->getErrorCode() == 520) {
+            $this->delete();
+            throw new UndocumentedEsiResponse($response->error(), $response->getErrorCode());
+        }
+
+        if ($response->getErrorCode() >= 500)
             throw new TemporaryEsiOutageException($response->error(), $response->getErrorCode());
+
 
         throw $exception;
     }

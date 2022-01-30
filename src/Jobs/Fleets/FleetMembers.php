@@ -9,7 +9,7 @@ abstract class FleetMembers extends AbstractFleetJob
 
     protected $method = 'get';
 
-    protected $version = 'latest';
+    protected $version = 'v1';
 
     protected $endpoint = '/fleets/{fleet_id}/members/';
 
