@@ -2,8 +2,8 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Fleets;
 
-use App\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractFleetJob;
+use LaravelEveTools\EveApi\Models\RefreshToken;
 
 abstract class KickMember extends AbstractFleetJob
 {
@@ -14,10 +14,11 @@ abstract class KickMember extends AbstractFleetJob
 
     protected $scope = 'esi-fleets.write_fleet.v1';
 
+    protected $version = 'v1';
     /**
      * @var int
      */
-    private $member_id;
+    protected $member_id;
 
 
     /**
@@ -31,10 +32,15 @@ abstract class KickMember extends AbstractFleetJob
         parent::__construct($fleet_id, $token);
     }
 
+    public function getMemberId()
+    {
+        return $this->member_id;
+    }
+
     protected function buildUriValues(): array
     {
         return array_merge(parent::buildUriValues(), [
-            'member_id' => $this->member_id
+            'member_id' => $this->getMemberId()
         ]);
     }
 

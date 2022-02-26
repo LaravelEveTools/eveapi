@@ -33,7 +33,7 @@ abstract class AbstractJob implements ShouldQueue
         return ['other'];
     }
 
-    public function failed(\Exception $exception){
+    public function failed(\Throwable $exception){
         event(new EsiLoggableEvent((new LoggingContainer)
             ->set('type', 'exception')
             ->set('exd', get_class($exception).':'.$exception->getMessage())

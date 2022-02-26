@@ -13,5 +13,7 @@ abstract class InviteMember extends AbstractFleetJob
 
     protected $scope = 'esi-fleets.write_fleet.v1';
 
+    protected $version = 'v1';
+
 
 }
