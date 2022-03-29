@@ -7,9 +7,11 @@ use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 abstract class SystemKills extends EsiBase
 {
 
-    protected $endpoint = '/universe/system_kills/';
+    public $method = 'get';
 
-    protected $version = 'v2';
+    public $endpoint = '/universe/system_kills/';
+
+    public $version = 'v2';
 
     public $tags = ['public', 'universe'];
 

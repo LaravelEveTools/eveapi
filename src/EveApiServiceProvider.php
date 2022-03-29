@@ -22,6 +22,8 @@ class EveApiServiceProvider extends ServiceProvider {
 
         $this->bind_contracts();
 
+        $this->mergeConfigFrom( __DIR__.'/Config/esi.php', 'esi');
+
         $this->app->singleton('esi-client', function(){
             return new EseyeSetup;
         });

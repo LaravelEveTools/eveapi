@@ -1,9 +1,9 @@
 <?php
+namespace LaravelEveTools\EveApi\Jobs\Status;
 
-use App\Models\EsiStatus;
-use LaravelEveTools\EveApi\Jobs\EsiBase;
+use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
-class Esi extends EsiBase
+abstract class Esi extends EsiBase
 {
 
     /**
@@ -13,8 +13,6 @@ class Esi extends EsiBase
 
     protected $endpoint = '/ping';
 
-
-
     protected $tags = ['public', 'meta'];
 
     public function middleware()
@@ -23,19 +21,4 @@ class Esi extends EsiBase
     }
 
 
-    public function handle()
-    {
-        $start = microtime(true);
-        try{
-            $status = $this->retrive()->raw;
-        }catch(Exception $e){
-            $status = 'Request failed with: '.$e->getMessage();
-        }
-        $end = microtime(true) - $start;
-
-        (new EsiStatus([
-            'status'=> $status,
-            'request_time' => $end,
-        ]))->save();
-    }
 }

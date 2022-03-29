@@ -12,6 +12,7 @@ class OpenContract extends AbstractAuthedJob
 
     protected $scope = 'esi-ui.open_window.v1';
 
+    protected $version = 'v1';
 
     public $tags = ['ui'];
 
