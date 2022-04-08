@@ -2,9 +2,13 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Fittings;
 
-use App\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Return fittings of a character
+ * 
+ * https://esi.evetech.net/ui/#/Fittings/get_characters_character_id_fittings
+ */
 abstract class Fittings extends AbstractAuthCharacterJob
 {
 
@@ -12,10 +16,7 @@ abstract class Fittings extends AbstractAuthCharacterJob
 
     protected $scope = 'esi-fittings.write_fittings.v1';
 
+    protected $tags = ['character', 'fitting'];
 
-    public function __construct($fitting, RefreshToken $token)
-    {
-        $this->request_body['fitting'] = $fitting;
-        parent::__construct($token);
-    }
+
 }

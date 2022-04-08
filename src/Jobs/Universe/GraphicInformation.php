@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Universe;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Get information on a graphic
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Universe/get_universe_graphics_graphic_id
+ */
 abstract class GraphicInformation extends EsiBase
 {
     protected $endpoint = '/universe/graphics/{graphic_id}/';

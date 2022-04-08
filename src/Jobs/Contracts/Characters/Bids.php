@@ -2,9 +2,14 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Contracts\Characters;
 
-use App\Models\RefreshToken;
+use LaravelEveTools\EveApi\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Lists bids on a particular auction contract
+ * 
+ * https://esi.evetech.net/ui/#/Contracts/get_characters_character_id_contracts_contract_id_bids
+ */
 abstract class Bids extends AbstractAuthCharacterJob
 {
 

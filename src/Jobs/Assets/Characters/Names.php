@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Assets\Characters;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Get Names of character assets
+ * 
+ * https://esi.evetech.net/ui/#/Assets/post_characters_character_id_assets_names
+ */
 abstract class Names extends AbstractAuthCharacterJob
 {
     protected $method = 'post';

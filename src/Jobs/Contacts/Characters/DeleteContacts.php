@@ -2,11 +2,14 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Contacts\Characters;
 
-use App\Jobs\AbstractedAuthCharacterJob;
-use App\Models\RefreshToken;
-use LaravelEveTools\EveApi\Jobs\Middleware\Contacts\CheckDeleteContacts;
+use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
-abstract class DeleteContacts extends AbstractedAuthCharacterJob
+/**
+ * Bulk delete contacts
+ * 
+ * https://esi.evetech.net/ui/#/Contacts/delete_characters_character_id_contacts
+ */
+abstract class DeleteContacts extends AbstractAuthCharacterJob
 {
 
     protected $method = 'delete';

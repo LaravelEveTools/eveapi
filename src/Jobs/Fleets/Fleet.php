@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Fleets;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractFleetJob;
 
+/**
+ * Return details about a fleet
+ * 
+ * https://esi.evetech.net/ui/#/Fleets/get_fleets_fleet_id
+ */
 abstract class Fleet extends AbstractFleetJob
 {
     protected $method = 'get';

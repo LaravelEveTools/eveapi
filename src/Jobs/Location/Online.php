@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Location;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Checks if the character is currently online
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Location/get_characters_character_id_online
+ */
 abstract class Online extends AbstractAuthCharacterJob
 {
 
@@ -11,8 +16,8 @@ abstract class Online extends AbstractAuthCharacterJob
 
     protected $scope = 'esi-location.read_location.v1';
 
-    protected $version = 'v2';
+    protected $version = 'v3';
 
-    public $tags = ['location'];
+    public $tags = ['character', 'location'];
     
 }

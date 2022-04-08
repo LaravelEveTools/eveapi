@@ -2,10 +2,14 @@
 
 namespace LaravelEveTools\EveApi\Jobs\UserInterface;
 
-use LaravelEveTools\EveApi\Events\UserInterface\ContractWindowOpened;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthedJob;
 use LaravelEveTools\EveApi\Models\RefreshToken;
 
+/**
+ * Open the contract window inside the client
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/User%20Interface/post_ui_openwindow_contract
+ */
 class OpenContract extends AbstractAuthedJob
 {
     protected $endpoint = '/ui/openwindow/contract/';
@@ -40,7 +44,5 @@ class OpenContract extends AbstractAuthedJob
         $this->query_string['contract_id'] = $this->contract_id;
 
         $result = $this->retrieve();
-
-        dispatch(new ContractWindowOpened($result, $this->contract_id));
     }
 }

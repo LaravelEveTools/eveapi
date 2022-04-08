@@ -2,9 +2,13 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Contacts\Characters;
 
-use App\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Bulk edit contacts with same settings
+ * 
+ * https://esi.evetech.net/ui/#/Contacts/put_characters_character_id_contacts
+ */
 abstract class EditContacts extends AbstractAuthCharacterJob
 {
 

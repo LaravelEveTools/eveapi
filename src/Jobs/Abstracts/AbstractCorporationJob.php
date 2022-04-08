@@ -2,6 +2,7 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Abstracts;
 
+
 abstract class AbstractCorporationJob extends EsiBase
 {
 

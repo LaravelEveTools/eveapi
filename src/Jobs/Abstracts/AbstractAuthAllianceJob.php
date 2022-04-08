@@ -4,6 +4,10 @@ namespace LaravelEveTools\EveApi\Jobs\Abstracts;
 
 use LaravelEveTools\EveApi\Models\RefreshToken;
 
+/**
+ * Authed requirements for alliance jobs.
+ * 
+ */
 abstract class AbstractAuthAllianceJob extends AbstractAllianceJob
 {
 

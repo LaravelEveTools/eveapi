@@ -4,6 +4,12 @@ namespace LaravelEveTools\EveApi\Jobs\Bookmarks\Corporations;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCorporationJob;
 
+/**
+ * Get Corporation Bookmark folders
+ * This endpoint is paged.
+ * 
+ * https://esi.evetech.net/ui/#/Bookmarks/get_corporations_corporation_id_bookmarks
+ */
 abstract class Folders extends AbstractAuthCorporationJob
 {
 

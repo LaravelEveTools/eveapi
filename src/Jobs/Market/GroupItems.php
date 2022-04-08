@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Market;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Get information on an item group
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Market/get_markets_groups_market_group_id
+ */
 abstract class GroupItems extends EsiBase
 {
     protected $endpoint = '/markets/groups/{marget_group_id}/';

@@ -5,6 +5,11 @@ namespace LaravelEveTools\EveApi\Jobs\Wallet\Corporations;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCorporationJob;
 use LaravelEveTools\EveApi\Models\RefreshToken;
 
+/**
+ * Retrieve the given corporation’s wallet journal for the given division going 30 days back
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Wallet/get_corporations_corporation_id_wallets_division_journal
+ */
 abstract class Journal extends AbstractAuthCorporationJob
 {
 

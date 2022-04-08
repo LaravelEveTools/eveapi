@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Opportunities;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Return information of an opportunities task
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Opportunities/get_opportunities_tasks_task_id
+ */
 abstract class Task extends EsiBase
 {
 

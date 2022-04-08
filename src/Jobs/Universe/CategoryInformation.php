@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Universe;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Get information of an item category
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Universe/get_universe_categories_category_id
+ */
 abstract class CategoryInformation extends EsiBase
 {
     protected $endpoint = '/universe/categories/{category_id}/';

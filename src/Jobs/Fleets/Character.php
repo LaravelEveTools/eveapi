@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Fleets;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Return the fleet ID the character is in, if any.
+ * 
+ * https://esi.evetech.net/ui/#/Fleets/get_characters_character_id_fleet
+ */
 abstract class Character extends AbstractAuthCharacterJob
 {
 
@@ -15,5 +20,6 @@ abstract class Character extends AbstractAuthCharacterJob
 
     protected $scope = 'esi-fleets.read_fleet.v1';
 
+    protected $tags = ['character', 'fleet'];
 
 }

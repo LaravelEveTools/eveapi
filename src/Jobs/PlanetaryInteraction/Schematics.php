@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\PlanetaryInteraction;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Get information on a planetary factory schematic
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Planetary%20Interaction/get_universe_schematics_schematic_id
+ */
 abstract class Schematics extends EsiBase
 {
 

@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Universe;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Get information on a star
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Universe/get_universe_stars_star_id
+ */
 abstract class StarInformation extends EsiBase
 {
     protected $endpoint = '/universe/stars/{star_id}/';

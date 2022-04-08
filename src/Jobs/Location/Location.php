@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Location;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Information about the characters current location. Returns the current solar system id, and also the current station or structure ID if applicable
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Location/get_characters_character_id_location
+ */
 abstract class Location extends AbstractAuthCharacterJob
 {
 
@@ -13,6 +18,6 @@ abstract class Location extends AbstractAuthCharacterJob
 
     protected $version = 'v2';
 
-    public $tags = ['location'];
+    public $tags = ['character','location'];
 
 }

@@ -2,9 +2,14 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Fleets;
 
-use App\Models\RefreshToken;
+use LaravelEveTools\EveApi\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractFleetJob;
 
+/**
+ * Delete a fleet wing, only empty wings can be deleted. The wing may contain squads, but the squads must be empty
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Fleets/delete_fleets_fleet_id_wings_wing_id
+ */
 abstract class DeleteWing extends AbstractFleetJob
 {
 

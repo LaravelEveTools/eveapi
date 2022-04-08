@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Universe;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Get information on a region
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Universe/get_universe_regions_region_id
+ */
 abstract class RegionInformation extends EsiBase
 {
     protected $endpoint = '/universe/regions/{region_id}/';

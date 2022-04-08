@@ -2,9 +2,14 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Search;
 
-use App\Models\RefreshToken;
+use LaravelEveTools\EveApi\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Search for entities that match a given sub-string.
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Search/get_characters_character_id_search
+ */
 abstract class CharacterSearch extends AbstractAuthCharacterJob
 {
 
@@ -14,8 +19,13 @@ abstract class CharacterSearch extends AbstractAuthCharacterJob
 
     public $tags = ['search'];
 
-    public function __construct(RefreshToken $token)
+    protected string $search;
+    protected array $categories;
+
+    public function __construct(string $search, array $categories, RefreshToken $token)
     {
+        $this->search = $search;
+        $this->categories = $categories;
         parent::__construct($token);
     }
 

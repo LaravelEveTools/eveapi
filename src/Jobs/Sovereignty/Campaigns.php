@@ -4,11 +4,18 @@ namespace LaravelEveTools\EveApi\Jobs\Sovereignty;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Shows sovereignty data for campaigns.
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Sovereignty/get_sovereignty_campaigns
+ */
 abstract class Campaigns extends EsiBase
 {
 
     protected $endpoint = '/sovereignty/campaigns/';
 
-    public $tags = ['public', 'sovereignty'];
+    protected $version = 'v1';
+
+    protected $tags = ['public', 'sovereignty'];
 
 }

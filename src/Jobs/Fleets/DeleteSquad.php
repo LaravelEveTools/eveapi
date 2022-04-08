@@ -2,9 +2,14 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Fleets;
 
-use App\Models\RefreshToken;
+use LaravelEveTools\EveApi\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractFleetJob;
 
+/**
+ * Delete a fleet squad, only empty squads can be deleted
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Fleets/delete_fleets_fleet_id_squads_squad_id
+ */
 abstract class DeleteSquad extends AbstractFleetJob
 {
     protected $method = 'delete';

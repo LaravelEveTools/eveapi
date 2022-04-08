@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Universe;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Get information on a station
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Universe/get_universe_stations_station_id
+ */
 abstract class StationInformation extends EsiBase
 {
     protected $endpoint = '/universe/stations/{station_id}/';

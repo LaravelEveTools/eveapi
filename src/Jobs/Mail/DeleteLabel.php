@@ -2,9 +2,14 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Mail;
 
-use App\Models\RefreshToken;
+use LaravelEveTools\EveApi\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Delete a mail label
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Mail/delete_characters_character_id_mail_labels_label_id
+ */
 abstract class DeleteLabel extends AbstractAuthCharacterJob
 {
 

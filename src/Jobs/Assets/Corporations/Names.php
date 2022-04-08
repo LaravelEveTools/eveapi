@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Assets\Corporations;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCorporationJob;
 
+/**
+ * Gets the names of corporation assets.
+ * 
+ * https://esi.evetech.net/ui/#/Assets/post_corporations_corporation_id_assets_names
+ */
 abstract class Names extends AbstractAuthCorporationJob
 {
     protected $method = 'post';

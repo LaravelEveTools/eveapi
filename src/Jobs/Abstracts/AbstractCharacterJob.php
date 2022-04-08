@@ -2,6 +2,10 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Abstracts;
 
+
+/**
+ *  Abstract Character Job
+ */
 abstract class AbstractCharacterJob extends EsiBase
 {
 

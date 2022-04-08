@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\PlanetaryInteraction\Characters;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Returns a list of all planetary colonies owned by a character.
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Planetary%20Interaction/get_characters_character_id_planets
+ */
 abstract class Colony extends AbstractAuthCharacterJob
 {
 

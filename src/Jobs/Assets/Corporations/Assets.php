@@ -4,6 +4,12 @@ namespace LaravelEveTools\EveApi\Jobs\Assets\Corporations;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCorporationJob;
 
+/**
+ * Get Assets of a corporation
+ * This endpoint is paged
+ * 
+ * https://esi.evetech.net/ui/#/Assets/get_corporations_corporation_id_assets
+ */
 abstract class Assets extends AbstractAuthCorporationJob
 {
 

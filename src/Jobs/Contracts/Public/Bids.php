@@ -4,10 +4,14 @@ namespace LaravelEveTools\EveApi\Jobs\Contracts\Pub;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
-abstract class Items extends EsiBase
+/**
+ * Lists bids on a public auction contract
+ * 
+ * https://esi.evetech.net/ui/#/Contracts/get_contracts_public_bids_contract_id
+ */
+abstract class Bids extends EsiBase
 {
-
-    protected $endpoint = '/contracts/public/items/{contract_id}/';
+    protected $endpoint = '/contracts/public/bids/{contract_id}/';
 
     protected $version = 'v1';
 

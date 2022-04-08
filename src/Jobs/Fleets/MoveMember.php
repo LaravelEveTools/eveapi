@@ -2,9 +2,14 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Fleets;
 
-use App\Models\RefreshToken;
+use LaravelEveTools\EveApi\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractFleetJob;
 
+/**
+ * Move a fleet member around
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Fleets/put_fleets_fleet_id_members_member_id
+ */
 abstract class MoveMember extends AbstractFleetJob
 {
 

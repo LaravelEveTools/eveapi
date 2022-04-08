@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Universe;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Get information on a solar system.
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Universe/get_universe_systems_system_id
+ */
 abstract class SystemInformation extends EsiBase
 {
     protected $endpoint = '/universe/systems/{system_id}/';

@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Corporations;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCorporationJob;
 
+/**
+ * Returns list of corporation starbases (POSes)
+ * 
+ * https://esi.evetech.net/ui/#/Corporation/get_corporations_corporation_id_starbases
+ */
 abstract class Starbases extends AbstractAuthCorporationJob
 {
     protected $endpoint = '/corporations/{corporation_id}/starbases/';

@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Dogma;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Returns info about a dynamic item resulting from mutation with a mutaplasmid.
+ * 
+ * https://esi.evetech.net/ui/#/Dogma/get_dogma_dynamic_items_type_id_item_id
+ */
 abstract class DynamicItem extends EsiBase
 {
 

@@ -2,8 +2,6 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Abstracts;
 
-
-
 use LaravelEveTools\EveApi\Models\RefreshToken;
 
 abstract class AbstractFleetJob extends AbstractAuthedJob

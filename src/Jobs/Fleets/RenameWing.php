@@ -2,9 +2,14 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Fleets;
 
-use App\Models\RefreshToken;
+use LaravelEveTools\EveApi\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractFleetJob;
 
+/**
+ * Rename a fleet wing
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Fleets/put_fleets_fleet_id_wings_wing_id
+ */
 abstract class RenameWing extends AbstractFleetJob
 {
 

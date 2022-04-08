@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Universe;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Get information on an asteroid belt
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Universe/get_universe_asteroid_belts_asteroid_belt_id
+ */
 abstract class AsteroidBelt extends EsiBase
 {
 

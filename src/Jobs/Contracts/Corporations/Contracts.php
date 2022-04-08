@@ -2,11 +2,18 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Contracts\Corporations;
 
-use App\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Returns contracts available to a corporation, only if the corporation is issuer, 
+ * acceptor or assignee. Only returns contracts no older than 30 days, or if 
+ * the status is "in_progress".
+ * 
+ * https://esi.evetech.net/ui/#/Contracts/get_corporations_corporation_id_contracts
+ */
 abstract class Contracts extends AbstractAuthCharacterJob
 {
+    protected $method = 'GET';
 
     protected $endpoint = '/corporations/{corporation_id}/contracts/';
 
@@ -14,16 +21,9 @@ abstract class Contracts extends AbstractAuthCharacterJob
 
     protected $scope = 'esi-contracts.read_corporation_contracts.v1';
 
-    public $tags = ['corporation', 'contract'];
+    protected $tags = ['corporation', 'contract'];
 
     protected $page = 1;
 
-    protected $contract_id;
-
-    public function __construct(RefreshToken $token)
-    {
-
-        parent::__construct($token);
-    }
 
 }

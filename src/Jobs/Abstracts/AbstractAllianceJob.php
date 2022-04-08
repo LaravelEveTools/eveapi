@@ -2,6 +2,9 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Abstracts;
 
+/**
+ * Base Class to collect and build uri for Alliance Jobs
+ */
 abstract class AbstractAllianceJob extends EsiBase
 {
 
@@ -47,7 +50,7 @@ abstract class AbstractAllianceJob extends EsiBase
         try {
             if(! in_array($this->getAllianceId(), $tags))
                 $tags[] = $this->getAllianceId();
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             logger()->error($e->getMessage(), $e->getTrace());
         }
 

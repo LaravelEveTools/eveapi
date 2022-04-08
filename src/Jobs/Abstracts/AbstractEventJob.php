@@ -2,8 +2,7 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Abstracts;
 
-use App\Models\RefreshToken;
-use LaravelEveTools\EveApi\Jobs\AbstractAuthCharacterJob;
+use LaravelEveTools\EveApi\Models\RefreshToken;
 
 abstract class AbstractEventJob extends AbstractAuthCharacterJob
 {

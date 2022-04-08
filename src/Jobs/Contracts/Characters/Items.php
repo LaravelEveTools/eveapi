@@ -2,11 +2,17 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Contracts\Characters;
 
-use App\Models\RefreshToken;
+use LaravelEveTools\EveApi\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Lists items of a particular contract
+ * 
+ * https://esi.evetech.net/ui/#/Contracts/get_characters_character_id_contracts_contract_id_items
+ */
 abstract class Items extends AbstractAuthCharacterJob
 {
+    protected $method = 'GET';
 
     protected $endpoint = '/characters/{character_id}/contracts/{contract_id}/items/';
 

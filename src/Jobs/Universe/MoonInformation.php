@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Universe;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Get information on a moon
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Universe/get_universe_moons_moon_id
+ */
 abstract class MoonInformation extends EsiBase
 {
     protected $endpoint = '/universe/moons/{moon_id}/';

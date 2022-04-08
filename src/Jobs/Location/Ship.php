@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Location;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Get the current ship type, name and id
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Location/get_characters_character_id_ship
+ */
 abstract class Ship extends AbstractAuthCharacterJob
 {
 
@@ -13,6 +18,6 @@ abstract class Ship extends AbstractAuthCharacterJob
 
     protected $version = 'v2';
 
-    public $tags = ['location'];
+    public $tags = ['character','location'];
     
 }

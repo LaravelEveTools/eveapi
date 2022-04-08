@@ -5,6 +5,11 @@ namespace LaravelEveTools\EveApi\Jobs\Wallet\Corporations;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCorporationJob;
 use LaravelEveTools\EveApi\Models\RefreshToken;
 
+/**
+ * Get wallet transactions of a corporation
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Wallet/get_corporations_corporation_id_wallets_division_transactions
+ */
 abstract class Transactions extends AbstractAuthCorporationJob
 {
 

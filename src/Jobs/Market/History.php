@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Market;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Return a list of historical market statistics for the specified type in a region
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Market/get_markets_region_id_history
+ */
 abstract class History extends EsiBase
 {
     protected $endpoint = '/markets/{region_id}/history/';

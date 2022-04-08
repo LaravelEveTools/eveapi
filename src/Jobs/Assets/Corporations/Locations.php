@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Assets\Corporations;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCorporationJob;
 
+/**
+ * Get coporation asset Locations
+ * 
+ * https://esi.evetech.net/ui/#/Assets/post_corporations_corporation_id_assets_locations
+ */
 abstract class Locations extends AbstractAuthCorporationJob
 {
     protected $method = 'post';

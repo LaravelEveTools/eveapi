@@ -5,6 +5,11 @@ namespace LaravelEveTools\EveApi\Jobs\Market;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthedJob;
 use LaravelEveTools\EveApi\Models\RefreshToken;
 
+/**
+ * Return all orders in a structure
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Market/get_markets_structures_structure_id
+ */
 abstract class Structure extends AbstractAuthedJob
 {
 
@@ -12,7 +17,7 @@ abstract class Structure extends AbstractAuthedJob
 
     protected $scope = 'esi-markets.structure_markets.v1';
 
-    public $tags = ['markets'];
+    public $tags = ['public','markets'];
 
     /**
      * @var int

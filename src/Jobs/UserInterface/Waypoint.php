@@ -6,6 +6,12 @@ use LaravelEveTools\EveApi\Events\UserInterface\WaypointSet;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthedJob;
 use LaravelEveTools\EveApi\Models\RefreshToken;
 
+
+/**
+ * Set a solar system as autopilot waypoint
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/User%20Interface/post_ui_autopilot_waypoint
+ */
 class Waypoint extends AbstractAuthedJob
 {
 

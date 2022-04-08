@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Dogma;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Get information on a dogma effect
+ * 
+ * https://esi.evetech.net/ui/#/Dogma/get_dogma_effects_effect_id
+ */
 abstract class EffectDetails extends EsiBase
 {
 

@@ -6,6 +6,11 @@ namespace LaravelEveTools\EveApi\Jobs\Killmails;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Return a single killmail from its ID and hash
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Killmails/get_killmails_killmail_id_killmail_hash
+ */
 abstract class Killmail extends EsiBase
 {
 

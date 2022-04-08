@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Assets\Characters;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Get the location of assets
+ * 
+ * https://esi.evetech.net/ui/#/Assets/post_characters_character_id_assets_locations
+ */
 abstract class Locations extends AbstractAuthCharacterJob
 {
     protected $method = 'post';

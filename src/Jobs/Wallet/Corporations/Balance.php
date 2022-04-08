@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Wallet\Corporations;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCorporationJob;
 
+/**
+ * Get a corporation’s wallets
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Wallet/get_corporations_corporation_id_wallets
+ */
 abstract class Balance extends AbstractAuthCorporationJob
 {
 

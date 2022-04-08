@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Wallet\Characters;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Retrieve the given character’s wallet journal going 30 days back
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Wallet/get_characters_character_id_wallet_journal
+ */
 abstract class Journal extends AbstractAuthCharacterJob
 {
 

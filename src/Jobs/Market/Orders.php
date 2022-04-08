@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Market;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Return a list of orders in a region
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Market/get_markets_region_id_orders
+ */
 abstract class Orders extends EsiBase
 {
     protected $endpoint = '/markets/{region_id}/orders/';

@@ -2,10 +2,15 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Contracts\Corporations;
 
-use App\Models\RefreshToken;
-
+use LaravelEveTools\EveApi\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCorporationJob;
 
+/**
+ * Lists bids on a particular auction contract
+ * This endpoint is paged
+ * 
+ * https://esi.evetech.net/ui/#/Contracts/get_corporations_corporation_id_contracts_contract_id_bids
+ */
 abstract class Bids extends AbstractAuthCorporationJob
 {
 
@@ -21,10 +26,10 @@ abstract class Bids extends AbstractAuthCorporationJob
 
     protected $contract_id;
 
-    public function __construct(int $contract_id, RefreshToken $token)
+    public function __construct(int $contract_id, int $corporation_id, RefreshToken $token)
     {
         $this->contract_id = $contract_id;
-        parent::__construct($token);
+        parent::__construct($corporation_id, $token);
     }
 
     public function buildUriValues(): array

@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Universe;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Get information on a constellation
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Universe/get_universe_constellations_constellation_id
+ */
 abstract class ConsteallationInformation extends EsiBase
 {
     protected $endpoint = '/universe/constellations/{constellation_id}/';

@@ -2,9 +2,14 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Assets\Characters;
 
-use App\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Get a characters assets ids
+ * This API Endpoint is paged.
+ * 
+ * https://esi.evetech.net/ui/#/Assets/get_characters_character_id_assets
+ */
 abstract class Assets extends AbstractAuthCharacterJob
 {
 

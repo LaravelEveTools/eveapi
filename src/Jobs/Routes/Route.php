@@ -5,7 +5,11 @@ namespace LaravelEveTools\EveApi\Jobs\Routes;
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
 
-
+/**
+ * Get the systems between origin and destination
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Routes/get_route_origin_destination
+ */
 abstract class Route extends EsiBase
 {
 

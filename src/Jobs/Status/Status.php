@@ -2,10 +2,14 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Status;
 
-use Seat\Eseye\Exceptions\InvalidAuthenticationException;
-use Seat\Eseye\Exceptions\InvalidContainerDataException;
+use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
-class Status extends \LaravelEveTools\EveApi\Jobs\EsiBase
+/**
+ * EVE Server status
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Status/get_status
+ */
+abstract class Status extends EsiBase
 {
     /**
      * @var string
@@ -17,10 +21,6 @@ class Status extends \LaravelEveTools\EveApi\Jobs\EsiBase
      */
     protected $endpoint = '/status/';
 
-    /**
-     * @var string
-     */
-    public $queue = 'high';
 
     /**
      * @var string

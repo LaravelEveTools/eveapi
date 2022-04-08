@@ -1,24 +1,14 @@
 <?php
 
-
-/**
- * Get details of single alliance.
- *
- * Return Data:
- * {
- *  creator_corporation_id
- *  creator_id
- *  date_founded
- *  executor_corporation_id
- *  name
- *  ticker
- * }
- */
-
 namespace LaravelEveTools\EveApi\Jobs\Alliance;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAllianceJob;
 
+/**
+ * Get the details of a specific alliance
+ * 
+ * https://esi.evetech.net/ui/#/Alliance/get_alliances_alliance_id
+ */
 abstract class Alliance extends AbstractAllianceJob
 {
     protected $method = 'get';

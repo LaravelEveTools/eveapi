@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Wallet\Characters;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Get wallet transactions of a character
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Wallet/get_characters_character_id_wallet_transactions
+ */
 abstract class Transactions extends AbstractAuthCharacterJob
 {
 

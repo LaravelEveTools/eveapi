@@ -11,5 +11,4 @@ abstract class Search extends EsiBase
 
     protected $version = 'v2';
 
-
 }

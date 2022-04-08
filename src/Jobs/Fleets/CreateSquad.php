@@ -2,9 +2,14 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Fleets;
 
-use App\Models\RefreshToken;
+use LaravelEveTools\EveApi\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractFleetJob;
 
+/**
+ * Create a new squad in a fleet
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Fleets/post_fleets_fleet_id_wings_wing_id_squads
+ */
 abstract class CreateSquad extends  AbstractFleetJob
 {
     protected $method = 'post';

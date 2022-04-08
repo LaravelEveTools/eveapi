@@ -2,9 +2,14 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Fittings;
 
-use App\Models\RefreshToken;
+use LaravelEveTools\EveApi\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Delete a fitting from a character
+ * 
+ * https://esi.evetech.net/ui/#/Fittings/delete_characters_character_id_fittings_fitting_id
+ */
 abstract class DeleteFitting extends AbstractAuthCharacterJob
 {
     protected $method = 'delete';
@@ -15,10 +20,12 @@ abstract class DeleteFitting extends AbstractAuthCharacterJob
 
     protected $version = 'v2';
 
+    protected $tags = ['character', 'fitting'];
+
     /**
      * @var int
      */
-    private $fitting_id;
+    protected $fitting_id;
 
     public function __construct(int $fitting_id, RefreshToken $token)
     {
@@ -26,10 +33,14 @@ abstract class DeleteFitting extends AbstractAuthCharacterJob
         parent::__construct($token);
     }
 
+    protected function GetFittingId(){
+        return $this->fitting_id;
+    }
+
     public function buildUriValues(): array
     {
         return array_merge(parent::buildUriValues(), [
-            'fitting_id' => $this->fitting_id,
+            'fitting_id' => $this->GetFittingId(),
         ]);
     }
 }

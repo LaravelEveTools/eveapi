@@ -4,6 +4,12 @@ namespace LaravelEveTools\EveApi\Jobs\Bookmarks\Characters;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * List Bookmarks from a character
+ * This endpoint is paged
+ * 
+ * https://esi.evetech.net/ui/#/Bookmarks/get_characters_character_id_bookmarks
+ */
 abstract class Bookmarks extends AbstractAuthCharacterJob
 {
     protected $method = 'get';

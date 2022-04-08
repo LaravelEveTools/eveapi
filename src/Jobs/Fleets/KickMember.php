@@ -5,6 +5,11 @@ namespace LaravelEveTools\EveApi\Jobs\Fleets;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractFleetJob;
 use LaravelEveTools\EveApi\Models\RefreshToken;
 
+/**
+ * Kick a fleet member
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Fleets/delete_fleets_fleet_id_members_member_id
+ */
 abstract class KickMember extends AbstractFleetJob
 {
 

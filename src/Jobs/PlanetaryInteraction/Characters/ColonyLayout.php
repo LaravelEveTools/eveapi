@@ -2,9 +2,16 @@
 
 namespace LaravelEveTools\EveApi\Jobs\PlanetaryInteraction\Characters;
 
-use App\Models\RefreshToken;
+use LaravelEveTools\EveApi\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * Returns full details on the layout of a single planetary colony, including links, pins and routes. 
+ * Note: Planetary information is only recalculated when the colony is viewed through the client. 
+ * Information will not update until this criteria is met.
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Planetary%20Interaction/get_characters_character_id_planets_planet_id
+ */
 abstract class ColonyLayout extends AbstractAuthCharacterJob
 {
 

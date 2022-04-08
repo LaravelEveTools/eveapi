@@ -5,6 +5,11 @@ namespace LaravelEveTools\EveApi\Jobs\Corporations;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCorporationJob;
 use LaravelEveTools\EveApi\Models\RefreshToken;
 
+/**
+ * Returns various settings and fuels of a starbase (POS)
+ * 
+ * https://esi.evetech.net/ui/#/Corporation/get_corporations_corporation_id_starbases_starbase_id
+ */
 abstract class StarbaseDetails extends AbstractAuthCorporationJob
 {
     protected $endpoint = '/corporations/{corporation_id}/starbases/{starbase_id}/';

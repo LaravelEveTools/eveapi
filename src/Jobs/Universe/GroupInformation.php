@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Universe;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Get information on an item group
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Universe/get_universe_groups_group_id
+ */
 abstract class GroupInformation extends EsiBase
 {
     protected $endpoint = '/universe/groups/{group_id}/';

@@ -4,8 +4,14 @@ namespace LaravelEveTools\EveApi\Jobs\Contacts\Alliances;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthAllianceJob;
 
+/**
+ * Return custom labels for an alliance’s contacts
+ * 
+ * https://esi.evetech.net/ui/#/Contacts/get_alliances_alliance_id_contacts_labels
+ */
 abstract class Labels extends AbstractAuthAllianceJob
 {
+    protected $method = 'get';
 
     protected $endpoint = '/alliances/{alliance_id}/contacts/labels/';
 
@@ -13,7 +19,7 @@ abstract class Labels extends AbstractAuthAllianceJob
 
     protected $scope   = 'esi-alliance.read_contacts.v1';
 
-    public $tags = ['alliances', 'contacts'];
+    protected $tags = ['alliances', 'contacts'];
 
 
 

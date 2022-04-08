@@ -3,6 +3,11 @@ namespace LaravelEveTools\EveApi\Jobs\Status;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Pings the ESI Endpoint
+ * 
+ * 
+ */
 abstract class Esi extends EsiBase
 {
 

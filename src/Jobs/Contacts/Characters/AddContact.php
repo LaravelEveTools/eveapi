@@ -2,11 +2,13 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Contacts\Characters;
 
-use App\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
-use LaravelEveTools\EveApi\Jobs\Middleware\Contacts\CheckAddContractJob;
-use phpDocumentor\Reflection\Types\Boolean;
 
+/**
+ * Bulk add contacts with same settings
+ * 
+ * https://esi.evetech.net/ui/#/Contacts/post_characters_character_id_contacts
+ */
 abstract class AddContact extends AbstractAuthCharacterJob
 {
 
@@ -17,5 +19,7 @@ abstract class AddContact extends AbstractAuthCharacterJob
     protected $version = 'v2';
 
     protected $scope = 'esi-characters.write_contacts.v1';
+
+    protected $tags = ['character', 'contacts'];
 
 }

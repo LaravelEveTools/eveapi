@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Opportunities;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Return information of an opportunities group
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Opportunities/get_opportunities_groups_group_id
+ */
 abstract class Group extends EsiBase
 {
 

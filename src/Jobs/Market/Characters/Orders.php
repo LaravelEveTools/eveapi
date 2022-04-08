@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Market\Characters;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractAuthCharacterJob;
 
+/**
+ * List open market orders placed by a character
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Market/get_characters_character_id_orders
+ */
 abstract class Orders extends AbstractAuthCharacterJob
 {
 
@@ -13,5 +18,5 @@ abstract class Orders extends AbstractAuthCharacterJob
 
     protected $version = 'v2';
 
-    public $tags = ['market'];
+    public $tags = ['character', 'market'];
 }

@@ -2,9 +2,14 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Fleets;
 
-use App\Models\RefreshToken;
+use LaravelEveTools\EveApi\Models\RefreshToken;
 use LaravelEveTools\EveApi\Jobs\Abstracts\AbstractFleetJob;
 
+/**
+ * Rename a fleet squad
+ * 
+ * https://esi.evetech.net/ui/?version=dev#/Fleets/put_fleets_fleet_id_squads_squad_id
+ */
 abstract class RenameSquad extends AbstractFleetJob
 {
     protected $method = 'put';

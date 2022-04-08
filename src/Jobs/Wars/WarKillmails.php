@@ -4,6 +4,11 @@ namespace LaravelEveTools\EveApi\Jobs\Wars;
 
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
+/**
+ * Return a list of kills related to a war
+ * 
+ * https://esi.evetech.net/ui/?version=latest#/Wars/get_wars_war_id_killmails
+ */
 abstract class WarKillmails extends EsiBase
 {
 
