@@ -2,12 +2,8 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Abstracts;
 
-//use App\Exceptions\TemporaryEsiOutageException;
-
 use Exception;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Redis;
 use LaravelEveTools\EveApi\Actions\RateLimits\IncrementEsiRateLimit;
 use LaravelEveTools\EveApi\Contracts\Middleware\CheckEsiStatusInterface;
 use LaravelEveTools\EveApi\Contracts\Middleware\CheckServerStatusInterface;

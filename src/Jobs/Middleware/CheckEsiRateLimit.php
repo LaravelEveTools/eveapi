@@ -2,6 +2,7 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Middleware;
 
+use LaravelEveTools\EveApi\Actions\RateLimits\AbstractRateLimitAction;
 use LaravelEveTools\EveApi\Actions\RateLimits\GetEsiRateLimit;
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
@@ -14,10 +15,10 @@ class CheckEsiRateLimit
             if($this->isEsiRateLimitReached($job)){
                 logger()->warning(
                     springf('Rate Limit has been reached. Job %s has been delayed by %d seconds',
-                    get_class($job), $job::RATE_LIMIT_DURATION)
+                    get_class($job), AbstractRateLimitAction::RATE_LIMIT_DURATION)
                 );
 
-                $job->release($job::RATE_LIMIT_DURATION);
+                $job->release(AbstractRateLimitAction::RATE_LIMIT_DURATION);
 
                 return;
             }
