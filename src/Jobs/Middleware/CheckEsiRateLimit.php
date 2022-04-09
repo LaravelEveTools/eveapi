@@ -2,6 +2,7 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Middleware;
 
+use LaravelEveTools\EveApi\Actions\RateLimits\GetEsiRateLimit;
 use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
 class CheckEsiRateLimit
@@ -28,8 +29,7 @@ class CheckEsiRateLimit
 
     private function isEsiRateLimitReached(EsiBase $job): bool
     {
-
-        $current = cache()->get($job::RATE_LIMIT_KEY) ?: 0;
+        $current = (new GetEsiRateLimit())->handle();
 
         logger()->debug('Rate Limit Status', ['current'=>$current, 'limit'=> $job::RATE_LIMIT]);
 

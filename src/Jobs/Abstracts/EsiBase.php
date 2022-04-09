@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
+use LaravelEveTools\EveApi\Actions\RateLimits\IncrementEsiRateLimit;
 use LaravelEveTools\EveApi\Contracts\Middleware\CheckEsiStatusInterface;
 use LaravelEveTools\EveApi\Contracts\Middleware\CheckServerStatusInterface;
 use LaravelEveTools\EveApi\Events\EsiLoggableEvent;
@@ -25,10 +26,6 @@ use Seat\Eseye\Exceptions\RequestFailedException;
 abstract class EsiBase extends AbstractJob
 {
     const RATE_LIMIT = 80;
-
-    const RATE_LIMIT_DURATION = 300;
-
-    const RATE_LIMIT_KEY = 'esitratelimit';
 
     const PERMANENT_INVALID_TOKEN_MESSAGE = [
         'invalid_token: The refresh token is expired.',
@@ -150,14 +147,6 @@ abstract class EsiBase extends AbstractJob
         return $this->scope ?: '';
     }
 
-    /**
-     * @return int
-     */
-    public function getRateLimitKeyTtl(): int
-    {
-        return 60;//Redis::ttl()
-        //return cache()->;//Redis::ttl(Cache::getPrefix() . self::RATE_LIMIT_KEY);
-    }
 
     /**
      * @return array
@@ -209,12 +198,7 @@ abstract class EsiBase extends AbstractJob
      */
     public function incrementEsiRateLimit(int $amount = 1)
     {
-        if ($this->getRateLimitKeyTtl() > 3) {
-            cache()->increment(self::RATE_LIMIT_KEY, $amount);
-        } else {
-            cache()->set(self::RATE_LIMIT_KEY, $amount, carbon('now')
-                ->addSeconds(self::RATE_LIMIT_DURATION));
-        }
+        (new IncrementEsiRateLimit())->handle($amount);
     }
 
     public function getRequestBody($key = null)
