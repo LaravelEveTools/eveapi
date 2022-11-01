@@ -2,13 +2,11 @@
 
 namespace LaravelEveTools\EveApi\Jobs\Search;
 
-use LaravelEveTools\EveApi\Jobs\Abstracts\EsiBase;
 
-abstract class Search extends EsiBase
+/**
+ * @deprecated /search engpoint removed from ESI. use CharacterSearch Instead
+ */
+abstract class Search extends CharacterSearch
 {
-
-    protected $endpoint = '/search/';
-
-    protected $version = 'v2';
 
 }
