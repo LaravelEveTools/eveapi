@@ -4,6 +4,8 @@ namespace LaravelEveTools\EveApi\Jobs\Abstracts;
 
 use Exception;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 use LaravelEveTools\EveApi\Actions\RateLimits\IncrementEsiRateLimit;
 use LaravelEveTools\EveApi\Contracts\Middleware\CheckEsiStatusInterface;
 use LaravelEveTools\EveApi\Contracts\Middleware\CheckServerStatusInterface;
@@ -22,6 +24,10 @@ use Seat\Eseye\Exceptions\RequestFailedException;
 abstract class EsiBase extends AbstractJob
 {
     const RATE_LIMIT = 80;
+
+    const RATE_LIMIT_DURATION = 300;
+
+    const RATE_LIMIT_KEY = 'esi-rate-limit';
 
     const PERMANENT_INVALID_TOKEN_MESSAGE = [
         'invalid_token: The refresh token is expired.',
@@ -49,7 +55,7 @@ abstract class EsiBase extends AbstractJob
      * GET, POST, PUT, DELETE
      * @var string
      */
-    protected $method = 'get';
+    protected $method = '';
 
     /**
      * API Endpoint
@@ -135,6 +141,10 @@ abstract class EsiBase extends AbstractJob
         return $tags;
     }
 
+    public function getRateLimitKeyTtl(): int{
+        return Redis::ttl(Cache::getPrefix().self::RATE_LIMIT_KEY);
+    }
+
     /**
      * @return string
      */
@@ -194,7 +204,13 @@ abstract class EsiBase extends AbstractJob
      */
     public function incrementEsiRateLimit(int $amount = 1)
     {
-        (new IncrementEsiRateLimit())->handle($amount);
+        if($this->getRateLimitKeyTtl() > 3){
+            cache()->increment(self::RATE_LIMIT_KEY, $amount);
+            // (new IncrementEsiRateLimit())->handle($amount);
+        }else{
+            cache()->set(self::RATE_LIMIT_KEY, $amount, carbon('now')->addSeconds(self::RATE_LIMIT_DURATION));
+        }
+        
     }
 
     public function getRequestBody($key = null)
@@ -240,7 +256,7 @@ abstract class EsiBase extends AbstractJob
 
 
         try {
-            $result = $client->invoke($this->method, $this->endpoint, empty($path_values) ? $this->buildUriValues() : $path_values);
+            $result = $client->invoke($this->method, $this->endpoint, $path_values);
 
             $this->updateRefreshToken();
         } catch (RequestFailedException $exception) {
@@ -390,6 +406,8 @@ abstract class EsiBase extends AbstractJob
         $this->incrementEsiRateLimit();
 
         $response = $exception->getEsiResponse();
+
+        $this->updateRefreshToken();
 
         if ($response->getErrorCode() == 403 && $response->error() == 'token expiry is too far in the future') {
             if ($this->token) {
